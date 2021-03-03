@@ -1,6 +1,6 @@
 module Main exposing (main)
 
-import BST exposing (BST, render)
+import BST exposing (BST)
 import Playground exposing (..)
 
 type alias Memory =
@@ -20,7 +20,7 @@ initialMemory =
   }
 
 view : Computer -> Memory -> List Shape
-view comp mem =
+view _ mem =
   [ group
       [ "new node value: " ++ String.fromInt mem.nodeVal
           |> words black
