@@ -28,7 +28,7 @@ view _ mem =
       , "hold up arrow to increment, down to decrement, enter to add to tree"
           |> words black
       ]
-      |> moveUp 400
+      |> moveUp 100
   , BST.render mem.tree
   ]
 
