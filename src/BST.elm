@@ -174,13 +174,14 @@ insert : Int -> BST -> BST
 insert n t = t
 
 -- fromList should take a list of numbers and produce a tree that has
--- a node for each value that was in the list.
+-- a node for each value that was in the list. The tree should be
+-- sorted, so that for all lists `l`, `isSorted (fromList l) == True`. 
 fromList : List Int -> BST
 fromList list = Leaf
 
 -- toList should take a BST and produce a list that contains all of the
 -- values from the tree in order. This means that if the input BST is
--- correctly sorted, then the output list is sorted as well. This means
+-- correctly sorted, then the output list is sorted as well, so
 -- that the first elements in the list is less than all of the rest in
 -- the list, and that property holds for all sublists as well.
 toList : BST -> List Int
