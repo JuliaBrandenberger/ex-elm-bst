@@ -59,3 +59,26 @@ bstTests =
     --    \_ -> Expect.equal x y
     
     ]
+
+-- fuzzer to produce sorted BSTs. ignore this for now.
+sortedBST : Fuzzer BST
+sortedBST =
+  let
+    f x t = case t of
+      Leaf -> singleton x
+      Node n l r -> if x < n then Node n (f x l) r else if n < x then Node n l (f x r) else t
+
+    generator : Generator BST
+    generator = Random.map (List.foldl f empty) (Random.list 100 (Random.int -100 100))
+
+    shrinker : Shrinker BST
+    shrinker t =
+      case t of
+        Leaf -> noShrink Leaf
+        Node n l r ->
+          Shrink.map Node (noShrink n)
+            |> Shrink.andMap (shrinker l)
+            |> Shrink.andMap (shrinker r)
+  in
+    custom generator noShrink
+
